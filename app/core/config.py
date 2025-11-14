@@ -10,7 +10,7 @@ class Settings(BaseSettings):
 
     @property
     def DATABASE_URL(self):
-        return f"sqlite+aiosqlite:///././task_scheduler.db"
+        return f"sqlite+aiosqlite:///././db.sqlite3"
 
 
 settings = Settings()
