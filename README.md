@@ -25,13 +25,17 @@ poetry install
 ### 3. Активируйте виртуальное окружение
 
 ```bash
-poetry shell
+. .venv/Scripts/activate
 ```
 ## Cоздайте начальную миграцию БД
 
 ```bash
 # Удалите старую БД если нужно
 rm ./db.sqlite3
+
+# Создадим папку versions
+cd alembic
+mkdir versions
 
 # Сгенерируйте миграцию
 alembic revision --autogenerate -m "initial"
