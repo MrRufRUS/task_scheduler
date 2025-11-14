@@ -1,5 +1,5 @@
 import datetime
-from sqlalchemy import DateTime, BigInteger, Float, func
+from sqlalchemy import DateTime, Integer, Float, func
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.database import Base
@@ -9,7 +9,7 @@ class Task(Base):
     __tablename__ = "tasks"
 
     id: Mapped[int] = mapped_column(
-        BigInteger, primary_key=True, index=True, autoincrement=True
+        Integer, primary_key=True, index=True, autoincrement=True
     )
 
     create_time: Mapped[datetime.datetime] = mapped_column(
