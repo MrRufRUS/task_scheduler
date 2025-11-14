@@ -38,14 +38,14 @@ async def worker(name: str):
 
         task_queue.task_done()
 
+
 async def enqueue_pending_tasks():
     async with async_session_maker() as db:
-        result = await db.execute(
-            select(Task.id).where(Task.time_to_execute.is_(None))
-        )
+        result = await db.execute(select(Task.id).where(Task.time_to_execute.is_(None)))
         task_ids = result.scalars().all()
         for task_id in task_ids:
             await task_queue.put(task_id)
+
 
 async def start_workers(num_workers: int = MAX_WORKERS):
 

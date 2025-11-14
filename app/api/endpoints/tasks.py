@@ -19,7 +19,7 @@ async def create_task_endpoint(db: AsyncSession = Depends(get_async_session)):
 
 @router.get("/{task_id}", response_model=TaskSchema)
 async def get_task_endpoint(
-        task_id: int, db: AsyncSession = Depends(get_async_session)
+    task_id: int, db: AsyncSession = Depends(get_async_session)
 ):
     task = await get_task_schema(db, task_id)
     if task is None:
