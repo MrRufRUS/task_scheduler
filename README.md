@@ -19,7 +19,7 @@ cd task_scheduler
 ### 2. Установите зависимости
 
 ```bash
-poetry install
+poetry install --no-root
 ```
 
 ### 3. Активируйте виртуальное окружение
@@ -36,6 +36,7 @@ rm ./db.sqlite3
 # Создадим папку versions
 cd alembic
 mkdir versions
+cd ..
 
 # Сгенерируйте миграцию
 alembic revision --autogenerate -m "initial"
