@@ -1,11 +1,11 @@
 import uvicorn
 from fastapi import FastAPI
 
-from app.api.endpoints.tasks import tasks_router
+from app.api.endpoints.tasks import router as tasks_router
 
 app = FastAPI()
 
 app.include_router(tasks_router)
 
-if __name__ == '__main__':
-    uvicorn.run(app='main:app')
+if __name__ == "__main__":
+    uvicorn.run(app="main:app")
