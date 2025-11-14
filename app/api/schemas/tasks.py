@@ -5,6 +5,7 @@ from pydantic import BaseModel, Field
 
 
 class TaskBase(BaseModel):
+    id: int
     status: Optional[str] = Field(None)
 
 
@@ -17,7 +18,6 @@ class TaskCreated(BaseModel):
 
 
 class TaskSchema(TaskBase):
-    id: int
     create_time: datetime
     start_time: Optional[datetime]
     time_to_execute: Optional[float]

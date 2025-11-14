@@ -5,18 +5,21 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.api.crud.tasks import create_task, get_task_schema
 from app.api.schemas.tasks import TaskCreated, TaskSchema
 from app.db.database import get_async_session
+from worker.worker import task_queue
 
 router = APIRouter(prefix="/tasks", tags=["Tasks"])
 
 
 @router.post("/", response_model=TaskCreated)
 async def create_task_endpoint(db: AsyncSession = Depends(get_async_session)):
-    return await create_task(db)
+    task_created = await create_task(db)
+    await task_queue.put(task_created.id)
+    return task_created
 
 
 @router.get("/{task_id}", response_model=TaskSchema)
 async def get_task_endpoint(
-    task_id: int, db: AsyncSession = Depends(get_async_session)
+        task_id: int, db: AsyncSession = Depends(get_async_session)
 ):
     task = await get_task_schema(db, task_id)
     if task is None:
